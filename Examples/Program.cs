@@ -10,11 +10,12 @@ namespace Examples
 {
     class Program
     {
+        static ArgFlag help = new ArgFlag("?", "help", "Справка");
+
         static void Main(string[] args)
         {
-            Trace.WriteLine("123");
-            Debug.WriteLine("hello");
-            //ArgsBase<int> a = new ArgsBase<int>("file", "Key to Set file", false);
+            ParamsHandler.Handle(args);
+
         }
     }
 }

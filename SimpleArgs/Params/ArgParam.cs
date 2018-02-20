@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SimpleArgs
 {
-    class ArgParam<T> : ArgFlag
+    public class ArgParam<T> : ArgFlag
     {
         public static implicit operator T(ArgParam<T> p)
         {
