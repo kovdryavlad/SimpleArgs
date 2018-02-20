@@ -8,6 +8,11 @@ namespace SimpleArgs
 {
     class ArgParam<T> : ArgFlag
     {
+        public static implicit operator T(ArgParam<T> p)
+        {
+            return p.Value;
+        }
+
         public T Value { get; set; }
         public bool Required { get; set; }
         public string Parametr { get; private set; }
