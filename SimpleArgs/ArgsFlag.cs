@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SimpleArgs
+﻿namespace SimpleArgs
 {
     public class ArgFlag
     {
@@ -13,28 +7,32 @@ namespace SimpleArgs
             return a.WasInitialized;
         }
 
+        //конструктор для наследования
+        internal ArgFlag(){}
+
         public string Description       { get; private set; }
         public string Key               { get; private set; }
         public string LongKey           { get; private set; }
         public bool   WasInitialized    { get; private set; } 
 
         public ArgFlag(string key)
-            : this(key, "", "")
+            : this(key, null, null)
         {
             
         }
 
         public ArgFlag(string key, string description)
-            :this(key, description, "")
+            :this(key, null, description)
         {
 
         }
 
         public ArgFlag(string key, string longkey, string description)
         {
-            this.Key = key;
-            this.LongKey = longkey;
-            this.Description = description;
+            Key = key;
+            LongKey = longkey;
+            Description = description;
+            WasInitialized = true;
         }
     }
 }
