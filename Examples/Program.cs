@@ -11,11 +11,14 @@ namespace Examples
     class Program
     {
         static ArgFlag help = new ArgFlag("?", "help", "Справка");
+        static ArgFlag V = new ArgFlag("?", "help", "Справка");
+        static ArgFlag G = new ArgFlag("?", "help", "Справка");
+
 
         static void Main(string[] args)
         {
-            ParamsHandler.Handle(args);
-
+            ParamsHandler.Handle();
+            Console.ReadLine();
         }
     }
 }
