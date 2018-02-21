@@ -14,8 +14,8 @@ namespace Examples
 
         static void Main(string[] args)
         {
-            ParamsHandler.Handle(args);
-
+            ParamsHandler.GetStartClassName();
+            Console.ReadKey();
         }
     }
 }

@@ -10,26 +10,16 @@ namespace SimpleArgs
 {
     public class ParamsHandler
     {
-        public static void Handle(string[] args)
-        {
-            var StartClassName = GetStartClassName();
-          
-        }
 
-        private static object GetStartClassName()
+        public static void GetStartClassName()
         {
             StackTrace tr = new StackTrace();
             var FrameWithMain = tr.GetFrame(tr.FrameCount-1);
 
-            var fields = FrameWithMain.GetMethod().ReflectedType.GetFields(BindingFlags.Static);
+            var fields = FrameWithMain.GetMethod().ReflectedType.GetFields(BindingFlags.Static | BindingFlags.NonPublic|BindingFlags.Public);
 
-            
 
-            var fg = FrameWithMain.GetMethod();
-            var c = fg.ReflectedType;
-            var zu = c.GetFields();
-
-            throw new NotImplementedException();
+            Array.ForEach(fields, Console.WriteLine);
         }
     }
 }
