@@ -1,6 +1,6 @@
 ﻿namespace SimpleArgs
 {
-    class AlternativeParams
+    public class AlternativeParams
     {
         public ArgFlag[] Alternatives { get; private set; }
 

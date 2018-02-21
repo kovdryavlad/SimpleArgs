@@ -10,14 +10,15 @@ namespace Examples
 {
     class Program
     {
-        static ArgFlag help = new ArgFlag("?", "help", "Справка");
-        static ArgFlag V = new ArgFlag("?", "help", "Справка");
-        static ArgFlag G = new ArgFlag("?", "help", "Справка");
+        static ArgFlag help    = new ArgFlag("?", "help", "Справка");
+        static ArgFlag Verbose = new ArgFlag("v", "help", "Вербоза");
 
+        static ArgParam<int> intParam = new ArgParam<int>("n","number", "Описание интового параметра");
+        static ArgService service = new ArgService("Справка по использованию программы", null);
 
         static void Main(string[] args)
         {
-            ParamsHandler.Handle();
+            ParamsHandler.Handle(args, typeof(Program));
             Console.ReadLine();
         }
     }

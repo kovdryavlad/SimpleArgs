@@ -1,6 +1,6 @@
 ﻿namespace SimpleArgs
 {
-    class ArgService
+    public class ArgService
     {
         public string HelpMessage { get; private set; }
         public AlternativeParams[] AlternativesParamsArray { get; private set; }
