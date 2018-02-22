@@ -13,9 +13,11 @@ namespace SimpleArgs
             return p.Value;
         }
 
-        public T Value { get { return Value; } set { Value = value; WasInitialized = true; } }
+        public T Value { get { return valueField; } set { valueField = value; WasInitialized = true; } }
         public bool Required { get; set; }
         public string Parametr { get; private set; }
+
+        T valueField;
 
         public ArgParam(string key, string parametr, string description)
              : this(key, null, description, default(T), true, parametr)

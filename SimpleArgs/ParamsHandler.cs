@@ -15,6 +15,9 @@ namespace SimpleArgs
             var StaticFields = type.GetFields(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
 
             var flags           = StaticFields.Where(f => f.FieldType == typeof(ArgFlag)).ToArray();
+
+            var types = TypesInfo.TypeList.Select(t => t.GetType).ToArray();
+
             var argsParamINT    = StaticFields.Where(f => f.FieldType == typeof(ArgParam<int>)).ToArray();
             var argsParamDouble = StaticFields.Where(f => f.FieldType == typeof(ArgParam<double>)).ToArray();
             var argsParamString = StaticFields.Where(f => f.FieldType == typeof(ArgParam<string>)).ToArray();

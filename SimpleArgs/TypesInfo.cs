@@ -12,7 +12,7 @@ namespace SimpleArgs
         static ArgType<int> t2 = new ArgType<int>(s=>Convert.ToInt32(s));
         static ArgType<double> t3 = new ArgType<double>(s => Convert.ToDouble(s.Replace('.', ',')));
         
-        static List<IArgType> TypeList = new List<IArgType>(new IArgType[] { t1, t2, t3});
+        public static List<IArgType> TypeList = new List<IArgType>(new IArgType[] { t1, t2, t3});
     }
 
     class ArgType<T>:IArgType
