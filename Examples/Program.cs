@@ -10,7 +10,6 @@ namespace Examples
 {
     class Program
     {
-        static ArgFlag help    = new ArgFlag("?", "help", "Справка");
         static ArgFlag Verbose = new ArgFlag("v", "help", "Вербоза");
 
         static ArgParam<int> intParam = new ArgParam<int>("n","number", "Описание интового параметра");

@@ -13,7 +13,7 @@ namespace SimpleArgs
             return p.Value;
         }
 
-        public T Value { get; set; }
+        public T Value { get { return Value; } set { Value = value; WasInitialized = true; } }
         public bool Required { get; set; }
         public string Parametr { get; private set; }
 

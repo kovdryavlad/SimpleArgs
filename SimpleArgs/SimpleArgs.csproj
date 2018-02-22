@@ -45,6 +45,7 @@
     <Compile Include="Params\ArgService.cs" />
     <Compile Include="Params\ArgFlag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypesInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

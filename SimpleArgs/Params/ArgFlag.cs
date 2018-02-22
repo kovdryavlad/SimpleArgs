@@ -13,7 +13,7 @@
         public string Description       { get; private set; }
         public string Key               { get; private set; }
         public string LongKey           { get; private set; }
-        public bool   WasInitialized    { get; private set; } 
+        public bool   WasInitialized    { get; internal set; } 
 
         public ArgFlag(string key)
             : this(key, null, null)
@@ -32,7 +32,6 @@
             Key = key;
             LongKey = longkey;
             Description = description;
-            WasInitialized = true;
         }
     }
 }
