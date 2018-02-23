@@ -9,7 +9,7 @@ namespace SimpleArgs
     class TypesInfo
     {
         static ArgType<string> t1 = new ArgType<string>(s => s);
-        static ArgType<int> t2 = new ArgType<int>(s=>Convert.ToInt32(s));
+        static ArgType<int>    t2 = new ArgType<int>(s=>Convert.ToInt32(s));
         static ArgType<double> t3 = new ArgType<double>(s => Convert.ToDouble(s.Replace('.', ',')));
         
         public static List<IArgType> TypeList = new List<IArgType>(new IArgType[] { t1, t2, t3});

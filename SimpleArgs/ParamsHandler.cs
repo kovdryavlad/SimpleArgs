@@ -14,18 +14,36 @@ namespace SimpleArgs
         {
             var StaticFields = type.GetFields(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
 
-            var flags           = StaticFields.Where(f => f.FieldType == typeof(ArgFlag)).ToArray();
-
-            var types = TypesInfo.TypeList.Select(t => t.GetType).ToArray();
-
-            var argsParamINT    = StaticFields.Where(f => f.FieldType == typeof(ArgParam<int>)).ToArray();
-            var argsParamDouble = StaticFields.Where(f => f.FieldType == typeof(ArgParam<double>)).ToArray();
-            var argsParamString = StaticFields.Where(f => f.FieldType == typeof(ArgParam<string>)).ToArray();
-
             var service = StaticFields.Where(f => f.FieldType == typeof(ArgService)).ToArray();
 
+            var flags = StaticFields.Where(f => f.FieldType == typeof(ArgFlag)).ToArray();
             GetFlags(args, flags.Select(f => (ArgFlag)f.GetValue(null)).ToArray(), (ArgService)service[0].GetValue(null));
-            //GetParams(args, )
+          
+            var types = TypesInfo.TypeList.Select(t => t.GetType).ToArray();
+            
+            var length = types.Length;
+           
+            for (int i = 0; i < length; i++)
+            {
+                Type tp = types[i];
+                MethodInfo m = typeof(ParamsHandler).GetMethod("GetParams", BindingFlags.Static|BindingFlags.Public|BindingFlags.NonPublic).MakeGenericMethod(new[] { tp });
+                m.Invoke(null, new object[] { args, StaticFields});
+            }
+
+           
+           
+        }
+
+        private static void GetParams<T>(string[] args, FieldInfo[] staticFields)
+        {
+            var argsParam = staticFields.Where(f => f.FieldType == typeof(ArgParam<T>)).Select(f=>(ArgParam<T>)f.GetValue(null)).ToArray();
+            Func<string, T> converter = (TypesInfo.TypeList.First(l => l.GetType == typeof(T)) as ArgType<T>).Converter;
+
+            
+            for (int i = 0; i < length; i++)
+            {
+                
+            }
         }
 
         public static void GetFlags(string[] args, ArgFlag[] flags, ArgService service)

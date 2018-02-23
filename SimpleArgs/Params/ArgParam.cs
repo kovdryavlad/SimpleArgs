@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace SimpleArgs
 {
-    public class ArgParam<T> : ArgFlag  
+    public class ArgParam<T> : ArgFlag, IArgType
     {
+        public Type GetType { get { return typeof(T); } }
         public static implicit operator T(ArgParam<T> p)
         {
             return p.Value;
