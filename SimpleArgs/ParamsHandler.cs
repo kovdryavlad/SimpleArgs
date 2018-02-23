@@ -40,10 +40,6 @@ namespace SimpleArgs
             Func<string, T> converter = (TypesInfo.TypeList.First(l => l.GetType == typeof(T)) as ArgType<T>).Converter;
 
             
-            for (int i = 0; i < length; i++)
-            {
-                
-            }
         }
 
         public static void GetFlags(string[] args, ArgFlag[] flags, ArgService service)
