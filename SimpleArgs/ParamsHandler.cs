@@ -182,10 +182,54 @@ namespace SimpleArgs
                 Console.Write("] ");
             }
 
+            var RequiredAlternatives = alternativs.Where(a => a.Required == true).ToArray();
+            for (int i = 0; i < RequiredAlternatives.Length; i++)
+            {
+                for (int j = 0; j < RequiredAlternatives[i].Alternatives.Length; j++)
+                {
+                    var alt = RequiredAlternatives[i].Alternatives[j] as IArgParamBase;
+
+                    if (alt != null)
+                    {
+                        if (alt.Required)
+
+                            Console.Write(alt.Key + " <" + alt.Parametr + ">");
+                        else
+                            Console.Write("[" + alt.Key + " <" + alt.Parametr + ">" + "]");
+                    }
+                    else
+                        Console.Write("[" + RequiredAlternatives[i].Alternatives[j].Key + "]");
+
+                    if (j != RequiredAlternatives[i].Alternatives.Length - 1)
+                        Console.Write("|");
+
+                }
+            }
+
+
+            List<IArgParamBase> requiredParams = new List<IArgParamBase>();
+            List<IArgParamBase> NonRequiredParams = new List<IArgParamBase>();
+
+            for (int i = 0; i < AllParams.Count; i++)
+            {
+                var param = AllParams[i];
+                if (!AllParams.Contains(param))
+                    if (param.Required)
+                        requiredParams.Add(param);
+                    else
+                        NonRequiredParams.Add(param);
+            }
+
+            for (int i = 0; i < NonRequiredParams.Count; i++)
+                Console.Write("[" + NonRequiredParams[i].Key + " <" + NonRequiredParams[i].Parametr + ">" + "] ");
+
+
+            for (int i = 0; i < requiredParams.Count; i++)
+                Console.Write(requiredParams[i].Key + " <" + requiredParams[i].Parametr + "> ");
+
+            
             //TODO - написать вывод справки
-            Console.Error.WriteLine();
             Environment.Exit(1);
-            throw new NotImplementedException();
         }
 
         private static string[] DeleteFlagsFromArgs(string[] args, List<int> indexesToDel)
@@ -226,12 +270,15 @@ namespace SimpleArgs
                         if (!Isset)
                         {
                             error = true;
-                            Console.Error.WriteLine("Не введен один из обязательных альтернативных параметров: ");
+                            Console.Error.Write("Не введен один из обязательных альтернативных параметров: ");
+                   
                             for (int j = 0; j < RequiredAlternatives[i].Alternatives.Length; j++)
                             {
-                                Console.Error.Write(RequiredAlternatives[i].Alternatives[j].Key);
+                                Console.Error.Write("-" + RequiredAlternatives[i].Alternatives[j].Key+" ");
 
                             }
+
+
                         }
                     }
                 }
@@ -261,12 +308,21 @@ namespace SimpleArgs
                     }
                 }
             }
+
+            if (error)
+            {
+                Environment.Exit(1);
+            }
+            
             //обработка обязательных параметров
             var requiredParams = AllParams.Where(p => p.Required == true).ToArray();
             if (requiredParams != null)
             {
                 for (int i = 0; i < requiredParams.Length; i++)
                 {
+                    AlternativeParams alternativeWithParam;
+                    //если в наборе альтернатив с текущим параметром уже что-то указано, не выводить ошибку
+                
                     if (!requiredParams[i].ValidateForRequired())
                     {
                         Console.WriteLine("Отсутствует обязательный параметр {0}", requiredParams[i].Key);

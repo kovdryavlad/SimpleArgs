@@ -18,4 +18,9 @@ namespace SimpleArgs
         string Key { get; }
         bool ValidateForRequired();
     }
+
+    public interface IInitializable
+    {
+        bool WasInitialized { get; set; }
+    }
 }

@@ -1,6 +1,6 @@
 ﻿namespace SimpleArgs
 {
-    public class ArgFlag
+    public class ArgFlag:IInitializable
     {
         public static implicit operator bool(ArgFlag a)
         {
@@ -13,7 +13,7 @@
         public string Description       { get; private set; }
         public string Key               { get; private set; }
         public string LongKey           { get; private set; }
-        public bool   WasInitialized    { get; internal set; } 
+        public bool   WasInitialized    { get; set; } 
 
         public ArgFlag(string key)
             : this(key, null, null)
