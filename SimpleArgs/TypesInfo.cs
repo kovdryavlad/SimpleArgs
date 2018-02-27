@@ -26,9 +26,4 @@ namespace SimpleArgs
             Converter = converter;
         }
     }
-
-    public interface IArgType
-    {
-        Type GetType { get; }
-    }
 }

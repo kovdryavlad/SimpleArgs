@@ -10,10 +10,12 @@ namespace Examples
 {
     class Program
     {
-        static ArgFlag Verbose = new ArgFlag("v", "help", "Вербоза");
+        static ArgFlag Verbose = new ArgFlag("v", "verboze", "Вербоза");
+        static ArgFlag Hight = new ArgFlag("h", "hight", "Высота");
 
-        static ArgParam<int> intParam = new ArgParam<int>("n","number", "Описание интового параметра");
-        static ArgService service = new ArgService("Справка по использованию программы", null);
+        static ArgParam<int> zu = new ArgParam<int>("zu", "зюбаба", "Дебют Зю") { Required = true };
+        static ArgParam<int> intParam = new ArgParam<int>("n", "number", "Описание интового параметра") { Required = true };
+        static ArgService service = new ArgService("Справка по использованию программы", new AlternativeParams(false, zu, intParam));
 
         static void Main(string[] args)
         {

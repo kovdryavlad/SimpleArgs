@@ -4,8 +4,11 @@
     {
         public ArgFlag[] Alternatives { get; private set; }
 
-        public AlternativeParams(params ArgFlag[] args)
+        public bool Required { get; internal set; }
+
+        public AlternativeParams(bool required, params ArgFlag[] args)
         {
+            Required = required;
             Alternatives = args;
         }
     }

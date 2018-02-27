@@ -6,9 +6,18 @@ using System.Threading.Tasks;
 
 namespace SimpleArgs
 {
-    public class ArgParam<T> : ArgFlag, IArgType
+    public class ArgParam<T> : ArgFlag, IArgType, IArgParamBase
     {
+        public bool ValidateForRequired()
+        {
+            if (Required && WasInitialized)
+                return true;
+
+            return false;
+        }
+
         public Type GetType { get { return typeof(T); } }
+
         public static implicit operator T(ArgParam<T> p)
         {
             return p.Value;
@@ -16,7 +25,7 @@ namespace SimpleArgs
 
         public T Value { get { return valueField; } set { valueField = value; WasInitialized = true; } }
         public bool Required { get; set; }
-        public string Parametr { get; private set; }
+        public string Parametr { get; set; }
 
         T valueField;
 
@@ -50,6 +59,7 @@ namespace SimpleArgs
             Value = value;
             Required = required;
             Parametr = parametr;
+            WasInitialized = false;
         }
     }
 }
